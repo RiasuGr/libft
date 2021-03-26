@@ -1,71 +1,32 @@
-NAME	= libft.a
+NAME = libft.a
 
-GCC		= gcc -Wall -Werror -Wextra
+SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c ft_strdup.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c 
 
-SRC		+= ft_atoi.c
-SRC		+= ft_bzero.c
-SRC		+= ft_isalnum.c
-SRC		+= ft_tolower.c
-SRC		+= ft_toupper.c
-SRC		+= ft_memcpy.c
-SRC		+= ft_memset.c
-SRC		+= ft_memccpy.c
-SRC		+= ft_memchr.c
-SRC		+= ft_memcmp.c
-SRC		+= ft_putstr_fd.c
-SRC		+= ft_strlcat.c
-SRC		+= ft_strlen.c
-SRC		+= ft_strchr.c
-SRC		+= ft_strrchr.c
-SRC		+= ft_strmapi.c
-SRC		+= ft_isalpha.c
-SRC		+= ft_isascii.c
-SRC		+= ft_strncmp.c
-SRC		+= ft_isdigit.c
-SRC		+= ft_putchar_fd.c
-SRC		+= ft_isprint.c
-SRC		+= ft_strdup.c
-SRC		+= ft_itoa.c
-SRC		+= ft_putendl_fd.c
-SRC		+= ft_strtrim.c
-SRC		+= ft_strnstr.c
-SRC		+= ft_putnbr_fd.c
-SRC		+= ft_strjoin.c
-SRC 	+= ft_isprint.c
-SRC 	+= ft_isalpha.c
-SRC		+= ft_lstdelone.c
-SRC		+= ft_lstnew.c
-SRC		+= ft_lstiter.c
-SRC		+= ft_lstmap.c
-SRC		+= ft_calloc.c
-SRC		+= ft_memmove.c
-SRC		+= ft_strlcpy.c
-SRC		+= ft_split.c
-SRC		+= ft_substr.c
-SRC		+= ft_lstadd_back.c
-SRC		+= ft_lstadd_back.c
-SRC		+= ft_lstclear.c
-SRC		+= ft_lstlast.c
-SRC		+= ft_lstsize.c
+OBJS = ${SRCS:.c=.o}
 
-OBJ		= $(subst .c,.o,$(SRC))
+SRC_BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
+OBJ_BONUS = ${SRC_BONUS:.c=.o}
 
-$(NAME): $(OBJ)
-		ar rc $(NAME) $(OBJ)
-		ranlib $(NAME)
+CC = gcc
 
-%.o: %.c
-		$(CC) -I. -o $@ -c $? $(CFLAGS)
+RM = rm -rf
+
+FLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 
-clean:
-		$(RM) $(OBJ)
+$(NAME): $(OBJS)
+	ar rc $(NAME) $(OBJS)
 
 fclean: clean
-		$(RM) $(NAME)
+	${RM} $(NAME)
+clean:
+	${RM} $(OBJS) $(OBJ_BONUS)
 
-re: fclean ${NAME}
+re: fclean $(NAME)
 
-.PHONY: clean clean re
+bonus: ${OBJS} ${OBJ_BONUS}
+	ar rcs $(NAME) $(OBJS) $(OBJ_BONUS)
+
+.PHONY: libft.a all clean fclean re bonus
