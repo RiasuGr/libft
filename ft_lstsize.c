@@ -6,7 +6,7 @@
 /*   By: sabenet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 11:01:32 by sabenet           #+#    #+#             */
-/*   Updated: 2021/03/22 11:02:00 by sabenet          ###   ########.fr       */
+/*   Updated: 2021/03/26 17:56:04 by sabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int			i;
-	t_list		*tmp;
+	unsigned int	size;
 
-	tmp = lst;
-	i = 0;
-	while (tmp)
+	size = 0;
+	while (lst)
 	{
-		tmp = tmp->next;
-		i++;
+		lst = lst->next;
+		size++;
 	}
-	return (i);
+	return (size);
 }
